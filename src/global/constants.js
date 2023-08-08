@@ -8,3 +8,13 @@ export const COUNTRIES = [
         {id: 1, name: 'Toronto'},
     ]},
 ]
+
+export const FORM_STATE = {
+    DEFAULT: 'DEFAULT', CREATE: 'CREATE', DELETE: 'DELETE'
+}
+export const FETCH_STATUS = {
+    IDLE: 'IDLE',
+    LOADING: 'LOADING',
+    SUCCESSED: 'SUCCESSED',
+    FAILED: 'FAILED'
+}
