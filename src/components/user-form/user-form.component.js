@@ -4,11 +4,13 @@ import './user-form.styles.css';
 import Select from 'react-select'
 import { COUNTRIES } from "../../global/constants";
 import { getCountry } from "../../global/functions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, updateUser } from "../../reducers/user.slice";
 
 
 const options = [
-    ... COUNTRIES.map(country => ({
+    ...COUNTRIES.map(country => ({
         value: country.id,
         label: country.name
     }))
@@ -16,21 +18,33 @@ const options = [
 
 export const UserForm = ({handleToggle}) => {
     const [ cityOption, setCityOption] = useState([]);
-
-    const { register, handleSubmit, control, formState: { errors }, setValue } = useForm();
-    const onSubmit = data => console.log(data);
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.users.currentUser);
     const handleCountryChange = (country) => {
         setCityOption([
-            ...getCountry(country.value).cities.map(city => ({
+            ...getCountry(country).cities.map(city => ({
                 label: city.name,
                 value: city.id
             }))
         ]);
-        setValue('city', 0, {
+        setValue('city', currentUser? currentUser.city: 0, {
             shouldValidate: false,
             shouldDirty: true
           });
     }
+
+    useEffect(()=> {
+        if (currentUser) handleCountryChange(currentUser.country)
+    }, [])
+    const { register, handleSubmit, control, formState: { errors }, setValue } = useForm(currentUser? {
+        defaultValues: {
+            username : currentUser.username,
+            city : currentUser.city,
+            country: currentUser.country
+        }
+    }: {});
+    const onSubmit = data => 
+        currentUser? dispatch(updateUser({...data, id: currentUser.id})) : dispatch(addUser(data))
 
     return (
         <div className="form-container">
@@ -75,7 +89,7 @@ export const UserForm = ({handleToggle}) => {
                             value={options.find((c) => c.value === value)}
                             onChange={(val) => {
                                 onChange(val.value);
-                                handleCountryChange(val)
+                                handleCountryChange(val.value)
                             }}
                         />
                         )}

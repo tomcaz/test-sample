@@ -13,8 +13,8 @@ export const Users = ({users}) => (
             </CTableRow>
         </CTableHead>
         <CTableBody>
-            {users.map(user => (
-                <User data={user} key={user.id} />
+            {users.map((user, index) => (
+                <User data={user} key={user.id} index={index} />
             ))}
         </CTableBody>
     </CTable>
