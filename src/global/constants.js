@@ -12,3 +12,9 @@ export const COUNTRIES = [
 export const FORM_STATE = {
     DEFAULT: 'DEFAULT', CREATE: 'CREATE', DELETE: 'DELETE'
 }
+export const FETCH_STATUS = {
+    IDLE: 'IDLE',
+    LOADING: 'LOADING',
+    SUCCESSED: 'SUCCESSED',
+    FAILED: 'FAILED'
+}

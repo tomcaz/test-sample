@@ -6,7 +6,7 @@ import { COUNTRIES } from "../../global/constants";
 import { getCountry } from "../../global/functions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUser, updateUser } from "../../reducers/user.slice";
+import { addUser, saveUser, updateUser } from "../../reducers/user.slice";
 
 
 const options = [
@@ -36,6 +36,7 @@ export const UserForm = ({handleToggle}) => {
     useEffect(()=> {
         if (currentUser) handleCountryChange(currentUser.country)
     }, [])
+
     const { register, handleSubmit, control, formState: { errors }, setValue } = useForm(currentUser? {
         defaultValues: {
             username : currentUser.username,
@@ -43,8 +44,9 @@ export const UserForm = ({handleToggle}) => {
             country: currentUser.country
         }
     }: {});
+
     const onSubmit = data => 
-        currentUser? dispatch(updateUser({...data, id: currentUser.id})) : dispatch(addUser(data))
+        currentUser? dispatch(updateUser({...data, id: currentUser.id})) : dispatch(saveUser(data))
 
     return (
         <div className="form-container">
@@ -68,7 +70,7 @@ export const UserForm = ({handleToggle}) => {
                             ...register("username",
                             {
                                 required: true,
-                                minLength: 4,
+                                minLength: 3,
                                 maxLength:66
                             }
                         )}
