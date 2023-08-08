@@ -1,0 +1,10 @@
+.buttons {
+    color: #FFF !important;
+    font-weight: bold !important;
+}
+.options {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: flex-end
+}

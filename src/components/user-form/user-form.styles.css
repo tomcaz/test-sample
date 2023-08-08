@@ -1,0 +1,19 @@
+.form-container {    
+  margin: 40px 0px 24px 0px;
+  padding: 8px 8px;
+
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background-color: white;
+}
+.label {
+  margin-bottom: 8px;
+}
+.form-buttom{
+  margin-top: 32px;
+}.error{
+  color:crimson
+}.error > div  {
+  border-color: crimson;
+}

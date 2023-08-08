@@ -1,0 +1,15 @@
+.header-custom{
+  margin-top: 24px;
+  text-align: center;
+}
+.App {
+  margin-top: 40px;
+  background-color: #EDEDED;
+  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
